@@ -1,0 +1,37 @@
+
+#spring 默认数据源
+spring:
+  datasource:
+    #test
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: "jdbc:oracle:thin:@10.90.85.231:1521/orcl"
+    username: realtime2
+    password: realtime123
+
+    #dev
+    #driver-class-name: oracle.jdbc.driver.OracleDriver
+    #url: jdbc:oracle:thin:@rhvan:1521:orcl
+    #username: van
+    #password: 123456
+
+    #prod
+    #driver-class-name: oracle.jdbc.driver.OracleDriver
+    #url: "jdbc:oracle:thin:@10.90.133.130:1521/csorm"
+    #username: realtime2
+    #password: realtime123
+server:
+  port: 8081
+multipart:
+    maxFileSize: 100Mb
+    maxRequestSize: 100Mb
+push:
+  destination:
+    notice: /status-info-resp
+    alert:  /status-alert-resp
+  threshold:
+    memory: 90
+    disk: 80
+    cpu: 95
+logging:
+  level: debug
+

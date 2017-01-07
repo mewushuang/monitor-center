@@ -1,0 +1,138 @@
+<style type="text/css">
+    .drop-box {
+        background: #F8F8F8;
+        border: 5px dashed #DDD;
+        width: 200px;
+        height: 65px;
+        text-align: center;
+        padding-top: 25px;
+        margin: 10px;
+    }
+    .fence {
+        margin-right: 0;
+        margin-left: 0;
+        background-color: #fff;
+        border-color: #ddd;
+        border-width: 1px;
+        border-radius: 4px 4px 0 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .dragover {
+        border: 5px dashed blue;
+    }
+</style>
+<div class="">
+    <button type="button" ng-click="$ctrl.hideInfo()" class="close"><span aria-hidden="true">&times;</span><span
+            class="sr-only">Close</span></button>
+
+    <div class="col-lg-3 col-sm-3" id="line-chart">
+        <!--<div class="panel panel-default">
+            <div class="panel-heading">Line Chart</div>
+            <div class="panel-body">
+                <canvas id="line" class="chart chart-line" chart-data="$ctrl.data" chart-labels="$ctrl.labels"
+                        chart-click="$ctrl.onClick" chart-hover="$ctrl.onHover" chart-series="$ctrl.series"
+                        chart-options="$ctrl.options"
+                        chart-dataset-override="$ctrl.datasetOverride"></canvas>
+            </div>
+        </div>-->
+
+        <div class="form-group ">
+            <button type="button" class="btn btn-danger" ng-click="$ctrl.restart($ctrl.objId)">重启后台</button>
+        </div>
+        <form role="form" name="form">
+            <div  class="form-group input-group-sm input-group" ng-class="parentStatus"  >
+                <span class="input-group-addon">选择目录：</span>
+                <select id="path-selector" class="form-control input-group " ng-model="parentPath">
+                    <option ng-repeat=" p in $ctrl.parents" value="{{p}}">{{p}}</option>
+                </select>
+            </div>
+            <div class="form-group input-group input-group-sm">
+                <span class="input-group-addon">上传文件：</span>
+                <button class=" btn btn-default btn-sm form-control" ngf-select ng-model="files" ngf-multiple="true">
+                    Select
+                </button>
+            </div>
+            <div class="form-group">
+                <ul>
+                    <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.uploadStatus}} {{f.$error}}</li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn-info btn btn-sm" ng-click="uploadFile(files)">submit</button>
+
+            </div>
+            <div class="form-group">
+
+            </div>
+        </form>
+        <div>
+            <div class="col-lg-6 col-sm-6 form-group" ng-repeat="file in fileList |byGroup:parentPath |orderBy:file">
+
+                <div class="" >{{file}}</div>
+
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group">
+                        <button type="button" class=" btn btn-default input-sm"
+                                ng-click="$ctrl.deleteLog(file)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                        <button type="button" class=" btn btn-default input-sm"
+                                ng-click="$ctrl.download(file)">
+                            <span class="glyphicon glyphicon-save"></span>
+                        </button>
+                        <button type="button" class=" btn btn-default input-sm"
+                                ng-click="$ctrl.clickOnFile(file)">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-sm-9">
+        <B>console:</B>
+        <form class="form-inline">
+            <div class="form-group">
+                <label class="col-lg-6" for="logLineNumSelect">lineNum</label>
+                <select id="logLineNumSelect" class="form-control input-sm col-lg-6" ng-model="$ctrl.logLineNum">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-1 sr-only" for="filterPatternInput">lineNum</label>
+                <input id="filterPatternInput" class="form-control input-sm col-lg-6"
+                       ng-model="$ctrl.logFilterPattern" placeholder="filter by pattern"/>
+                <button type="button" class=" form-control btn btn-default input-sm col-lg-6"
+                        ng-click="$ctrl.searchByPattern()">go
+                </button>
+            </div>
+            <!--百分百搜索-->
+            <div class="form-group">
+                <label class="col-lg-1 sr-only" for="filterPercentInput">lineNum</label>
+                <input id="filterPercentInput" class="form-control input-sm col-lg-6"
+                       ng-model="$ctrl.logFilterPercent" placeholder="filter by percent"/>
+                <button type="button" class="form-control btn btn-default input-sm col-lg-6"
+                        ng-click="$ctrl.searchByPercent()">go
+                </button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-default input-sm"
+                        ng-click="$ctrl.getNextLines($ctrl.objId,$ctrl.filename,$ctrl.lineNum)">get more
+                </button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-default input-sm"
+                        ng-click="$ctrl.resetLogOffset()">reset offset
+                </button>
+            </div>
+        </form>
+        <div class="fence">
+            <p ng-repeat="logLine in $ctrl.logLines" id="line-num-{{logLine.lineOffset}}">{{logLine.content}}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+angular.module('objList').component('objList', {
+    templateUrl: '/app/obj-list/obj-list.template.html',
+    controller: [
+        '$http',
+        'ObjService',
+        '$location',
+        '$rootScope',
+        '$scope',
+        '$route',
+        function ($http, ObjService, $location,$rootScope,$scope,$route) {
+            var self = this;
+            self.orderPorp = 'id';//根据id排序
+            self.fileName = '';
+            //TODO 异常处理
+
+            //启动服务
+            self.startObj = ObjService.startRemotely;
+
+            //停止服务
+            self.stopObj =function (objId,args) {
+                ObjService.stopRemotely(objId,args)
+            };
+
+            self.reloadFromDB = ObjService.reload;
+
+            self.showInfo=function (objId,param) {
+
+                $location.path('/info/'+objId);
+            }
+
+
+
+        }]
+})

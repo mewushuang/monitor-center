@@ -1,0 +1,54 @@
+group 'yydk'
+//version ''
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+    }
+}
+apply plugin: 'java'
+
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+
+
+repositories {
+    //mavenCentral()
+    flatDir {
+        dirs 'lib'
+    }
+    maven{
+        url="http://maven.aliyun.com/nexus/content/groups/public/"
+    }
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+def spingBootVersion="1.4.2.RELEASE"
+def spingVersion="4.3.4.RELEASE"
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:"+spingBootVersion)
+    providedCompile "org.springframework.boot:spring-boot-starter-tomcat:"+spingBootVersion
+    compile("org.springframework.boot:spring-boot-starter-websocket:"+spingBootVersion)
+    compile("org.springframework.boot:spring-boot-starter-jdbc:"+spingBootVersion)
+    compile("org.springframework.boot:spring-boot-starter-aop:"+spingBootVersion)
+    compile("org.springframework.boot:spring-boot-devtools:"+spingBootVersion)
+    compile("org.springframework:spring-jdbc:"+spingVersion)
+    compile "org.springframework.boot:spring-boot-configuration-processor:"+spingBootVersion
+    compile fileTree(dir: './lib')
+    testCompile("junit:junit")
+
+    compile "org.springframework.boot:spring-boot-legacy:1.0.2.RELEASE"
+}
+
+compileJava.dependsOn(processResources)
+
+war{
+    webXml = file('src/web.xml')
+}

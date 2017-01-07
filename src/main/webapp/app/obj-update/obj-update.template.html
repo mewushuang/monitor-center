@@ -1,0 +1,48 @@
+<style type="text/css">
+    .ng-invalid {
+        border-color: #fc976e;
+        -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow:inset 0 1px 1px rgba(0,0,0,.075)
+    }
+    .ng-invalid :focus {
+        border-color: #d43f29;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)
+    }
+</style>
+<div ng-show="canDelete"><button class="btn btn-danger pull-right" ng-click="deleteObj(id)">删除</button></div>
+<form novalidate ng-submit="doSubmit()" name="updateObj" role="form">
+    <div class="form-group" ng-class="">
+        <label for="objName">名称<spna style="color:#a94442">*</spna></label>
+        <input required name="name" ng-model="name" type="text" class="form-control" id="objName"
+               placeholder="为您监控的服务定义一个容易区分的名字">
+    </div>
+    <div class="form-group">
+        <label for="objUrl">URL<spna style="color:#a94442">*</spna></label>
+        <input required name="url" ng-model="url" type="text" class="form-control" id="objUrl" placeholder="127.0.0.1">
+    </div>
+    <div class="form-group">
+        <label for="objCName">控制类名称<spna style="color:#a94442">*</spna></label>
+        <input required name="ctrlname" class="form-control" ng-model="ctrlname" type="text" id="objCName" placeholder="用于jmx的mxbean检索">
+        <p class="help-block">Example block-level help text here.</p>
+    </div>
+    <button role="button" class="pull-right btn btn-info" ng-click="addParam()">添加参数</button>
+    <div  ng-repeat="param in params track by $index">
+        <div class=" form-inline">
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<spna style="color:#a94442">*</spna>:</label>
+            <input required type="text" name="name{{$index}}" ng-model="param.name" class="form-control" class="form-control" />
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params:</label>
+            <input type="text" name="val{{$index}}" ng-model="param.val" class="form-control" class="form-control" />
+            <a class="btn-default btn"   ng-click="delParam($index)">移除</a>
+        </div>
+    </div>
+    <div class="form-group"></div>
+    <div class="form-group"></div>
+    <div class="form-group">
+        <div class="col-md-2"></div>
+        <a role="button" class=" col-md-2 center-block btn btn-default" href="#!/obj">返回</a>
+        <div class="col-md-1"></div>
+        <button type="submit" class="  col-md-2 center-block  btn btn-info">Submit</button>
+        <div class="col-md-3"></div>
+    </div>
+</form>
