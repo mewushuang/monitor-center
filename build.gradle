@@ -34,17 +34,21 @@ def spingBootVersion="1.4.2.RELEASE"
 def spingVersion="4.3.4.RELEASE"
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:"+spingBootVersion)
-    providedCompile "org.springframework.boot:spring-boot-starter-tomcat:"+spingBootVersion
+    //providedCompile "org.springframework.boot:spring-boot-starter-tomcat:"+spingBootVersion
     compile("org.springframework.boot:spring-boot-starter-websocket:"+spingBootVersion)
     compile("org.springframework.boot:spring-boot-starter-jdbc:"+spingBootVersion)
     compile("org.springframework.boot:spring-boot-starter-aop:"+spingBootVersion)
     compile("org.springframework.boot:spring-boot-devtools:"+spingBootVersion)
-    compile("org.springframework:spring-jdbc:"+spingVersion)
     compile "org.springframework.boot:spring-boot-configuration-processor:"+spingBootVersion
+    compile("org.springframework.boot:spring-boot-starter-security:"+spingBootVersion)
+
+    compile("org.springframework:spring-jdbc:"+spingVersion)
+
     compile fileTree(dir: './lib')
     testCompile("junit:junit")
 
-    compile "org.springframework.boot:spring-boot-legacy:1.0.2.RELEASE"
+    //此依赖是为了适配servlet2.x规范，使用web.xml启动容器
+    //compile "org.springframework.boot:spring-boot-legacy:1.0.2.RELEASE"
 }
 
 compileJava.dependsOn(processResources)

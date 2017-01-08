@@ -10,7 +10,7 @@ angular.module('monitorApp', [
     'ngFileUpload',
     'objList',
     'objInfo',
-    'objShot',
+    'login',
     'objUpdate',
     'core.obj',
     'core.push'

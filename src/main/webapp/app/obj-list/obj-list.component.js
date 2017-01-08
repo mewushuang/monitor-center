@@ -4,10 +4,10 @@ angular.module('objList').component('objList', {
         '$http',
         'ObjService',
         '$location',
-        '$rootScope',
+        'loginService',
         '$scope',
         '$route',
-        function ($http, ObjService, $location,$rootScope,$scope,$route) {
+        function ($http, ObjService, $location,loginService,$scope,$route) {
             var self = this;
             self.orderPorp = 'id';//根据id排序
             self.fileName = '';
@@ -28,6 +28,17 @@ angular.module('objList').component('objList', {
                 $location.path('/info/'+objId);
             }
 
+            self.logout=function () {
+                $http.post('/api/logout',{}).then(
+                    function (resp) {
+                        if(resp&&resp.status==200){
+                            loginService.open();
+                        }
+                    },function (resp) {
+                        console.log(resp);
+                    }
+                )
+            }
 
 
         }]

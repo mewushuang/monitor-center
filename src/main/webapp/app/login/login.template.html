@@ -1,0 +1,51 @@
+
+<style type="text/css">
+    .ng-invalid {
+        border-color: #fc976e;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)
+    }
+
+    .ng-invalid :focus {
+        border-color: #d43f29;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)
+    }
+
+    .login {
+        width: 500px;
+        margin: 80px auto;
+        .center-block();
+    }
+    .margin-10 {
+        margin: 50px 0;
+    }
+</style>
+
+<div class="login" id="horizontal bar-chart">
+    <div class="panel panel-default ">
+        <div class="panel-heading">Horizontal Bar Chart</div>
+        <div class="panel-body">
+            <form novalidate ng-submit="doSubmit()" name="loginObj" role="form">
+                <div class="form-group" ng-class="">
+                    <label for="userInput">USERNAME:
+                    </label>
+                    <input required name="j_username" ng-model="j_username" type="text" class="form-control" id="userInput"
+                           placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="pwdInput">PASSWORD:
+                    </label>
+                    <input required name="j_password" ng-model="j_password" type="password" class="form-control" id="pwdInput"
+                           placeholder="">
+                </div>
+                <div class="margin-10">
+                    <div class="col-md-3"></div>
+                    <button type="submit" class="  col-md-6 center-block  btn btn-info">登陆</button>
+                    <div class="col-md-3"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

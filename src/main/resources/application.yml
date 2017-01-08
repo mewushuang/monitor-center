@@ -4,9 +4,9 @@ spring:
   datasource:
     #test
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: "jdbc:oracle:thin:@10.90.85.231:1521/orcl"
-    username: realtime2
-    password: realtime123
+    #url: "jdbc:oracle:thin:@10.90.85.231:1521/orcl"
+    #username: realtime2
+    #password: realtime123
 
     #dev
     #driver-class-name: oracle.jdbc.driver.OracleDriver
@@ -16,14 +16,15 @@ spring:
 
     #prod
     #driver-class-name: oracle.jdbc.driver.OracleDriver
-    #url: "jdbc:oracle:thin:@10.90.133.130:1521/csorm"
-    #username: realtime2
-    #password: realtime123
+    url: "jdbc:oracle:thin:@10.90.133.130:1521/csorm"
+    username: realtime2
+    password: realtime123
+  http:
+    multipart:
+      maxFileSize: 60MB
+      maxRequestSize: 60MB
 server:
-  port: 8081
-multipart:
-    maxFileSize: 100Mb
-    maxRequestSize: 100Mb
+  port: 9000
 push:
   destination:
     notice: /status-info-resp
