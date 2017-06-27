@@ -1,3 +1,9 @@
+angular.module('objList').filter('trunc',function () {
+    return function(input){
+        return input.slice(0,input.indexOf(":"))
+    }
+})
+
 angular.module('objList').component('objList', {
     templateUrl: '/app/obj-list/obj-list.template.html',
     controller: [
@@ -26,6 +32,11 @@ angular.module('objList').component('objList', {
             self.showInfo=function (objId,param) {
 
                 $location.path('/info/'+objId);
+            }
+
+            self.scode=function () {
+
+                $location.path('/scode');
             }
 
             self.logout=function () {

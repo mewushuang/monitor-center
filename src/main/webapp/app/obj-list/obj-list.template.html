@@ -22,6 +22,10 @@
                     <button type="button" ng-click="$ctrl.logout()" class="btn btn-warning">退出登录
                     </button>
                 </div>
+                <div class="form-group">
+                    <button type="button" ng-click="$ctrl.scode()" class="btn btn-default">指标监控
+                    </button>
+                </div>
             </form>
 
         </div>
@@ -32,28 +36,30 @@
                 <p class="text-warning pull-right">因服务的起停都是异步进行的，请在点击后耐心等待状态的切换</p>
             </div>
 
-            <table class="table table-striped table-hover">
-                <thead>
+            <table class="table table-striped table-hover text-center">
+                <thead class="text-center">
                 <tr>
                     <th class="hidden">#</th>
-                    <th>名称</th>
+                    <td>名称</td>
+                    <td>主机</td>
                     <td>CPU</td>
-                    <th>内存</th>
-                    <th>硬盘</th>
-                    <th>启动</th>
-                    <th>详情</th>
-                    <th>停止</th>
-                    <th>修改</th>
+                    <td>内存</td>
+                    <td>硬盘</td>
+                    <td>启动</td>
+                    <td>详情</td>
+                    <td>停止</td>
+                    <td>修改</td>
                 </tr>
                 </thead>
                 <tr ng-repeat="obj in $root.current | toArray | filter:$ctrl.query |orderBy:$ctrl.orderProp">
                     <td ng-class="$obj._warnClass" class="hidden">{{obj.id}}</td>
                     <td ng-class="$obj._warnClass">{{obj.name}}</td>
+                    <td ng-class="$obj._warnClass">{{obj.url|trunc}}</td>
                     <td ng-class="$obj._warnClass">{{$root.current[obj.id].cpuMetric}}</td>
                     <td ng-class="$obj._warnClass">{{$root.current[obj.id].memoryMetric}}</td>
                     <td ng-class="$obj._warnClass">{{$root.current[obj.id].diskMetric}}</td>
                     <td ng-class="$obj._warnClass">
-                        <div class="btn-group inline pull-left" ng-repeat="param in obj.params">
+                        <div class="btn-group inline" ng-repeat="param in obj.params">
                             <button ng-disabled="$root.current[obj.id]._pis[param.name].startStatus" type="button"
                                     ng-class="$root.current[obj.id]._pis[param.name].warnClass"
                                     ng-click="$ctrl.startObj(obj.id,param.val)" class="btn">start {{param.name}}
@@ -61,7 +67,7 @@
                         </div>
                     </td>
                     <td ng-class="$obj._warnClass">
-                        <div class="btn-group inline pull-left" ng-repeat="param in obj.params">
+                        <div class="btn-group inline" ng-repeat="param in obj.params">
                             <button ng-disabled="$root.current[obj.id]._pis[param.name].infoStatus" type="button"
                                     ng-class="$root.current[obj.id]._pis[param.name].warnClass"
                                     ng-click="$ctrl.showInfo(obj.id,param.val)" class="btn">info {{param.name}}
@@ -69,7 +75,7 @@
                         </div>
                     </td>
                     <td ng-class="$obj._warnClass">
-                        <div class="btn-group inline pull-left" ng-repeat="param in obj.params">
+                        <div class="btn-group inline" ng-repeat="param in obj.params">
                             <button ng-disabled="$root.current[obj.id]._pis[param.name].stopStatus" type="button"
                                     ng-class="$root.current[obj.id]._pis[param.name].warnClass"
                                     ng-click="$ctrl.stopObj(obj.id,param.val)" class="btn">stop {{param.name}}

@@ -1,8 +1,9 @@
 angular.module('objUpdate').component('objUpdate', {
 
     templateUrl: '/app/obj-update/obj-update.template.html',
-    controller: ['$scope', '$rootScope', '$routeParams', '$http', '$location', 'ObjService', 'pushService',
-        function ($scope, $rootScope, $routeParams, $http, $location, ObjService, pushService) {
+    controller: ['$scope', '$rootScope', '$routeParams', '$http',
+                '$location', 'ObjService', 'pushService','alertService',
+        function ($scope, $rootScope, $routeParams, $http, $location, ObjService, pushService,alertService) {
             var toUpdate;
             if ($routeParams.objId) {
                 toUpdate = $rootScope.current[$routeParams.objId]
@@ -51,18 +52,20 @@ angular.module('objUpdate').component('objUpdate', {
             };
 
             $scope.deleteObj = function (objId) {
-                $http.post('/obj/delete', {
-                    objId: objId
-                }).then(function (resp) {//成功则返回
-                    if (resp && resp.status == 200) {
-                        delete $rootScope.current[objId];
-                        ObjService.refresh();
-                        $location.path('#!/obj');
-                    }
-                    console.log(resp)
-                }, function (resp) {
-                    console.log(resp)
-                });
+                alertService.alertWarn("确定删除？",function () {
+                    $http.post('/obj/delete', {
+                        objId: objId
+                    }).then(function (resp) {//成功则返回
+                        if (resp && resp.status == 200) {
+                            delete $rootScope.current[objId];
+                            ObjService.refresh();
+                            $location.path('#!/obj');
+                        }
+                        console.log(resp)
+                    }, function (resp) {
+                        console.log(resp)
+                    });
+                })
             };
 
         }]

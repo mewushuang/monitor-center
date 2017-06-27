@@ -3,6 +3,8 @@ package com.van.mc.controller;
 import com.van.mc.common.IllegalParamException;
 import com.van.mc.repository.Monitor_obj;
 import com.van.mc.repository.Monitor_objDao;
+import com.van.mc.repository.ScodeMonitorDao;
+import com.van.mc.repository.Scode_history;
 import com.van.mc.service.CollectService;
 import com.van.mc.service.ObjCache;
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by van on 2016/11/23.
@@ -33,6 +36,9 @@ public class MonitorObjController {
 
     @Autowired
     private CollectService collectService;
+
+    @Autowired
+    private ScodeMonitorDao scodeMonitorDao;
 
     @RequestMapping("/obj/list")
     public String showMonitorObj(){
@@ -100,4 +106,11 @@ public class MonitorObjController {
                 .body("window.___context___path='"+request.getContextPath()+"'");
     }
     //  2016/12/1 异常在service层处理
+
+    @RequestMapping("/scode/list")
+    @ResponseBody
+    public List<Scode_history> showScodeHistory(){
+
+        return  scodeMonitorDao.selectAll();
+    }
 }

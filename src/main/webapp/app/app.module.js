@@ -13,7 +13,8 @@ angular.module('monitorApp', [
     'login',
     'objUpdate',
     'core.obj',
-    'core.push'
+    'core.push',
+    'scode'
 ]);
 //直接部署在容器（tomcat)根目录下时没有问题，http请求类似127.0.0.1:8080/index.html
 //但入部署为tomcat的某个应用，http请求仍为上面的路径，但此时实际路径已变成127.0.0.1:8080/appName/index.html

@@ -24,7 +24,6 @@
 
 <div class="login" id="horizontal bar-chart">
     <div class="panel panel-default ">
-        <div class="panel-heading">Horizontal Bar Chart</div>
         <div class="panel-body">
             <form novalidate ng-submit="doSubmit()" name="loginObj" role="form">
                 <div class="form-group" ng-class="">
@@ -36,12 +35,12 @@
                 <div class="form-group">
                     <label for="pwdInput">PASSWORD:
                     </label>
-                    <input required name="j_password" ng-model="j_password" type="password" class="form-control" id="pwdInput"
+                    <input ng-keyup="keyup($event);" required name="j_password" ng-model="j_password" type="password" class="form-control" id="pwdInput"
                            placeholder="">
                 </div>
                 <div class="margin-10">
                     <div class="col-md-3"></div>
-                    <button type="submit" class="  col-md-6 center-block  btn btn-info">登陆</button>
+                    <button type="submit" class="  col-md-6 center-block  btn btn-info">登入</button>
                     <div class="col-md-3"></div>
                 </div>
             </form>

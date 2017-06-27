@@ -9,11 +9,16 @@ angular.module('objInfo').component('objInfo', {
         '$scope',
         '$route',
         'Upload',
-        function ($http, ObjService, pushService, $routeParams, $scope, $route, Upload) {
+        'alertService',
+        function ($http, ObjService, pushService, $routeParams, $scope, $route, Upload,alertService) {
             var self = this;
 
             self.objId = $routeParams.objId;
-            self.restart=ObjService.restart;
+            self.restart=function(id){
+                alertService.alertWarn('确定要重启后台？',function(){
+                    ObjService.restart(id);
+                });
+            }
 
             self.download = ObjService.download;
 
@@ -41,17 +46,18 @@ angular.module('objInfo').component('objInfo', {
             }
 
             self.deleteLog = function (fileName) {
-                ObjService.deleteLog(fileName, function (response) {
-                    if(response&&response.data&&response.data.code==200) {
-                        for (var i = 0; i < $scope.fileList.length; i++) {
-                            if ($scope.fileList[i] == fileName) {
-                                $scope.fileList.splice(i, 1);
+                alertService.alertWarn("确定删除文件"+fileName+'?',function () {
+                    ObjService.deleteLog(fileName, function (response) {
+                        if(response&&response.data&&response.data.code==200) {
+                            for (var i = 0; i < $scope.fileList.length; i++) {
+                                if ($scope.fileList[i] == fileName) {
+                                    $scope.fileList.splice(i, 1);
+                                }
                             }
-                        }
-                        //$scope.$apply();
-                    }else console.log(response)
+                            //$scope.$apply();
+                        }else console.log(response)
+                    });
                 });
-
             }
 
 

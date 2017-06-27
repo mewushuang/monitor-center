@@ -2,29 +2,41 @@
 #spring 默认数据源
 spring:
   datasource:
-    #test
-    driver-class-name: oracle.jdbc.driver.OracleDriver
+    #pro
+    #driver-class-name: oracle.jdbc.driver.OracleDriver
     #url: "jdbc:oracle:thin:@10.90.85.231:1521/orcl"
     #username: realtime2
     #password: realtime123
 
-    #dev
-    #driver-class-name: oracle.jdbc.driver.OracleDriver
-    #url: jdbc:oracle:thin:@rhvan:1521:orcl
+    #dev 本地docker环境
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    #url: jdbc:oracle:thin:@localhost:1521:XE
     #username: van
     #password: 123456
 
+    #test
+    #url: "jdbc:oracle:thin:@10.90.79.189:1521/orcl"
+    #username: realtime2
+    #password: realtime123
+
     #prod
     #driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: "jdbc:oracle:thin:@10.90.133.130:1521/csorm"
+    #url: "jdbc:oracle:thin:@10.90.133.130:1521/csorm"
+    url: "jdbc:oracle:thin:@192.168.30.152:1521/csorm"
     username: realtime2
     password: realtime123
   http:
     multipart:
-      maxFileSize: 60MB
-      maxRequestSize: 60MB
+      maxFileSize: 100MB
+      maxRequestSize: 100MB
+      location: ${user.dir}
 server:
-  port: 9000
+  port: 9595
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: kedong
+    keyStoreType: PKCS12
+    keyAlias: tomcat
 push:
   destination:
     notice: /status-info-resp

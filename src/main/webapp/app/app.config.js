@@ -17,6 +17,9 @@ config(['$locationProvider',
         when('/info/:objId', {
             template: '<obj-info></obj-info>'
         }).
+        when('/scode', {
+            template: '<scode></scode>'
+        }).
         otherwise('/obj');
 
 

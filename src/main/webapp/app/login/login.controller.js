@@ -3,6 +3,12 @@
 
     loginController.$inject = ['$scope', '$rootScope', '$uibModalInstance', '$http', '$location'];
     function loginController($scope, $rootScope, $uibModalInstance, $http, $location) {
+        $scope.keyup=function (event) {
+            if(event.keyCode=='13'){
+                $scope.doSubmit();
+            }
+        }
+
         $scope.doSubmit = function () {
             if (!$scope.loginObj.$valid) {
                 console.log($scope.loginObj.$error);
@@ -34,7 +40,7 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function (response) {
-                return response;
+                return response; 
             });
         }
     }
