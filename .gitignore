@@ -11,6 +11,5 @@ gen
 .gradle/
 .idea/
 build/
-lib/
 out/
 src/test/
